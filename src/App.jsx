@@ -2,9 +2,12 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
-import { FormControl, FormHelperText, Input, InputLabel, Container, Button, Alert, Switch } from '@mui/material'
+import { FormControl, FormHelperText, Input, InputLabel, Container, Button, Alert, Switch, TextField } from '@mui/material'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+
+import registrationLogo from "./assets/task1.webp"
+import {Lock} from "@mui/icons-material"
 function App() {
   // const [form, setForm] = useState({
   //   name : "",
@@ -28,7 +31,7 @@ function App() {
   const submitHandler =(e) => {
 e.preventDefault()
   if(!name || !email || !password || !confirmPassword || !number){
-    console.log(name , email, password, confirmPassword , number)
+  
     return toast.error("Please enter all the fields")
   
   }
@@ -38,11 +41,12 @@ e.preventDefault()
 if(password !== confirmPassword){
   return toast.error(" Password doesn't match...")
 }
-if(number.length != 10){
-  return toast.error(" Invalid phone number")
-}
+// if(number.length != 10){
+//   return toast.error(" Invalid phone number")
+// }
 // if(typeof number != )
 console.log(name , password , email , confirmPassword , number)
+console.log(typeof number)
 setName("")
 setConfirmPassword("")
 setEmail("")
@@ -54,33 +58,35 @@ toast.success("Hurray ! Form Submitted...")
 
   return (
     <>
-    <Container maxWidth="lg" sx={{border : "1px solid purple" , background : ""}}>
-
-    <form onSubmit={submitHandler} style={{display:"flex" , flexDirection : "column" , gap : "2.8vmax" , justifyContent : "center", alignItems : "center", padding : "2vmax" }}>
-    <h2 style={{fontFamily : "Roboto" , fontSize : "2vmax"}} >Task1</h2>
-      <FormControl sx={{width : "20vmax"}}  color='secondary'>
-  <InputLabel htmlFor="my-input">Name </InputLabel>
-  <Input value={name} onChange={e => setName(e.target.value)} type='text'  id="my-input" aria-describedby="my-helper-text" />
+    <Container className='container' maxWidth="lg" sx={{ bgcolor : "#e8d5f0", display : "flex"}}>
+<img src={registrationLogo} alt="" />
+    <form onSubmit={submitHandler} style={{display:"flex" , flexDirection : "column" , gap : "2.8vmax" ,  justifyContent : "center", alignItems : "center", padding : "2vmax", width : "70%" }}>
+    <h2 style={{fontFamily : "Roboto" , fontSize : "2vmax", color: "purple"}} >Registration Form</h2>
+      <FormControl sx={{width : "30vmax"}} >
+  
+  <TextField value={name} color='secondary' required onChange={e => setName(e.target.value)} label="Name" type='text' variant='standard'   id="my-input" aria-describedby="my-helper-text" />
  
 </FormControl>
-      <FormControl sx={{width : "20vmax"}} color='secondary'>
-  <InputLabel htmlFor="my-input">Email address</InputLabel>
-  <Input value={email} onChange={e => setEmail(e.target.value)}  type='email' id="my-input" aria-describedby="my-helper-text" />
+      <FormControl sx={{width : "30vmax"}} >
+  {/* <InputLabel htmlFor="my-input">Email address</InputLabel> */}
+  <TextField value={email} color='secondary' required onChange={e => setEmail(e.target.value)} variant='standard'  label="Email" type='email' id="my-input" aria-describedby="my-helper-text" />
   
 </FormControl>
-      <FormControl sx={{width : "20vmax"}} color='secondary'>
-  <InputLabel htmlFor="my-input">Password</InputLabel>
-  <Input  value={password} onChange={e => setPassword(e.target.value)}  type='password' id="my-input" aria-describedby="my-helper-text" />
+      <FormControl sx={{width : "30vmax"}} >
+  {/* <InputLabel htmlFor="my-input">Password</InputLabel> */}
+  {/* <Lock/> */}
+  <TextField color='secondary'  value={password} required onChange={e => setPassword(e.target.value)} variant='standard' label="Password" type='password' id="my-input" aria-describedby="my-helper-text" />
   
 </FormControl>
-      <FormControl sx={{width : "20vmax"}} color='secondary'>
-  <InputLabel  htmlFor="my-input">Confirm Password</InputLabel>
-  <Input value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)}  type='password' id="my-input" aria-describedby="my-helper-text" />
+      <FormControl sx={{width : "30vmax"}} >
+  {/* <InputLabel  htmlFor="my-input">Confirm Password</InputLabel> */}
+  <TextField  color='secondary' value={confirmPassword} required onChange={e => setConfirmPassword(e.target.value)} variant='standard' label="Confirm Password"  type='password' id="my-input" aria-describedby="my-helper-text" />
   
 </FormControl>
-      <FormControl sx={{width : "20vmax"}} color='secondary'>
-  <InputLabel htmlFor="my-input">Phone Number</InputLabel>
-  <Input  value={number} onChange={e => setNumber(e.target.value)}  type='number' id="my-input" aria-describedby="my-helper-text" />
+      <FormControl sx={{width : "30vmax"}} >
+  {/* <InputLabel htmlFor="my-input">Phone Number</InputLabel> */}
+  <TextField color='secondary'  required label="Phone Number" sx={{color : "white"}}   value={number} variant='standard' onChange={e => setNumber(e.target.value)} inputProps={{ inputMode : "numeric",  title:"Please enter a valid phone number" ,pattern:"[1-9]{1}[0-9]{9}"}}  type='tel'  id="my-input" aria-describedby="my-helper-text" />
+  
   
 </FormControl>
 

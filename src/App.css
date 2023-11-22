@@ -6,3 +6,26 @@
   background: #fff;
 }
 
+.container {
+  display:  flex;
+flex-direction: row;
+/* padding: 1vmax 3vmax; */
+}
+
+.container form{
+  margin: 2vmax 4vmax;
+  border-left: 1px solid purple;
+
+}
+
+@media screen and (max-width: 768px) {
+  .container{
+
+    flex-direction: column; 
+
+  }
+  .container form{
+    border-left: none;
+    border-top: 1px solid purple;
+  }
+}
