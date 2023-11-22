@@ -55,8 +55,10 @@ setNumber("")
 toast.success("Hurray ! Form Submitted...")
 
   }
+  function validatePhoneNumber(input){
+    input.target.value = input.target.value.replace(/\D/g, '');
 
-
+  }
   return (
     <>
     <Container className='container' maxWidth="lg" sx={{ bgcolor : "#e8d5f0", display : "flex"}}>
@@ -86,7 +88,7 @@ toast.success("Hurray ! Form Submitted...")
 </FormControl>
       <FormControl sx={{width : "30vmax"}} >
   {/* <InputLabel htmlFor="my-input">Phone Number</InputLabel> */}
-  <TextField  color='secondary'   required label="Phone Number" sx={{color : "white"}}   value={number} variant='standard' onChange={e => setNumber(e.target.value)} inputProps={{ inputMode : "numeric",  title:"Please enter a valid phone number" ,pattern:"[1-9]{1}[0-9]{9}", maxLength : 10}}  type='tel'  id="my-input" aria-describedby="my-helper-text" />
+  <TextField  color='secondary'   required label="Phone Number" sx={{color : "white"}} onInput={(e) => validatePhoneNumber(e)}   value={number} variant='standard' onChange={e => setNumber(e.target.value)} inputProps={{ inputMode : "numeric",  title:"Please enter a valid phone number" ,pattern:"[1-9]{1}[0-9]{9}", maxLength : 10}}  type='tel'  id="my-input" aria-describedby="my-helper-text" />
   
   
 </FormControl>
