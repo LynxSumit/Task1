@@ -1,7 +1,10 @@
-import {  useRef, useState } from 'react'
+// Task 2 
+
+import {  useEffect, useRef, useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
+import {db} from "./firebase"
 import { FormControl, FormHelperText, Input, InputLabel, Container, Button, Alert, Switch, TextField } from '@mui/material'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -10,8 +13,25 @@ import { useDispatch } from 'react-redux'
 import registrationLogo from "./assets/task1.webp"
 import {Lock} from "@mui/icons-material"
 import { submit } from './Reducers/FormSlice' 
+import { getDocs, collection, addDoc } from 'firebase/firestore'
 function App() {
   const dispatch = useDispatch()
+const [formData, setFormData] = useState(null);
+  const fetchPost = async () => {
+       
+    await getDocs(collection(db, "formData"))
+        .then((querySnapshot)=>{               
+            const newData = querySnapshot.docs
+                .map((doc) => ({...doc.data(), id:doc.id }));
+            setFormData(newData);                
+            console.log(formData, newData);
+        })
+   
+}
+
+useEffect(()=>{
+    fetchPost();
+}, [])
 
   
   // const [form, setForm] = useState({
@@ -33,11 +53,20 @@ function App() {
   const [number, setNumber] = useState('');
 // const [isCompleted, setIsCompleted] = useState(false);
 
-  const submitHandler =(e) => {
+  const submitHandler = async (e) => {
 e.preventDefault()
 
 dispatch(submit({name, email, password, confirmPassword, number}))
-
+e.preventDefault();  
+       
+try {
+    const docRef = await addDoc(collection(db, "formData"), {
+      data: {name , email , password , confirmPassword , number},    
+    });
+    console.log("Document written with ID: ", docRef.id);
+  } catch (e) {
+    console.error("Error adding document: ", e);
+  }
 setName("")
 setConfirmPassword("")
 setEmail("")
@@ -93,6 +122,8 @@ setNumber("")
 }
 
 export default App
+
+// Task 1 
 
 
 // import {  useRef, useState } from 'react'
