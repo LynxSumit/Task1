@@ -3,29 +3,14 @@
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
-  background: #fff;
-}
-
-.container {
-  display:  flex;
-flex-direction: row;
-/* padding: 1vmax 3vmax; */
-}
-
-.container form{
-  margin: 2vmax 4vmax;
-  border-left: 1px solid purple;
 
 }
-
-@media screen and (max-width: 768px) {
-  .container{
-
-    flex-direction: column; 
-
-  }
-  .container form{
-    border-left: none;
-    border-top: 1px solid purple;
-  }
+body{
+  background-image: linear-gradient(to left, #e3e3e3, #e5e5e8, #e7e7ec, #e8eaf1, #e9ecf6, #e6ecf6, #e3ebf5, #e0ebf4, #dbe7ed, #d7e3e7, #d3dfe0, #d0dada);
 }
+
+.container{
+background: #fff;
+}
+
+

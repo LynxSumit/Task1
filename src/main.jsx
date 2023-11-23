@@ -6,7 +6,7 @@ import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 import {Provider} from "react-redux"
-import {store} from "./Store.js"
+import {store} from "./app/Store.js"
 import './index.css'
 
 ReactDOM.createRoot(document.getElementById('root')).render(

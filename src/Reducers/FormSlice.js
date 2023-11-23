@@ -5,12 +5,15 @@ import { db } from "../firebase";
 let initialState = {
     form : 
         {
-            name : "",
+            firstName : "",
+            lastName : "",
+            role : "",
             email : "",
             password : "",
             confirmPassword : "",
-            number : ""
-        }
+            number : "",
+            bio : "" 
+               }
     
 }
 
@@ -20,14 +23,17 @@ export const formSlice = createSlice({
     reducers : {
         submit : async (state , action) => {
             const data = {
-                name : action.payload.name,
+                firstName : action.payload.firstName,
+                lastName : action.payload.lastName,
+                role : action.payload.role,
                 email : action.payload.email,
                 password : action.payload.password,
                 confirmPassword : action.payload.confirmPassword,
-                number : action.payload.number
+                number : action.payload.number,
+                bio : action.payload.bio,
             }
 
-const {name,email,password , confirmPassword, number} = data
+const {firstName , lastName , role ,email,password , confirmPassword, number, bio} = data
  
 if(data.password.length < 6){
   return toast.error("Password must conatain 6 characters..")
@@ -36,16 +42,17 @@ if(data.password !== data.confirmPassword){
 return toast.error(" Password doesn't match...")
 }
 try {
-    await addDoc(collection(db, "Registration"), {
-        data: { name, email, password, confirmPassword, number },
+  let data =   await addDoc(collection(db, "Registration"), {
+        data: { firstName , lastName , role ,email,password , confirmPassword, number, bio },
       });
+      console.log(data)
    
     } catch (e) {
       console.error("Error adding document: ", e);
     }
 
 
-
+ 
 toast.success("Hurray ! Form Submitted...")
 
 
@@ -63,7 +70,7 @@ toast.success("Hurray ! Form Submitted...")
     });
   }
 
-
+ 
     }
 })
 
